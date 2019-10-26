@@ -21,8 +21,6 @@ services:
       - mysql_data:/var/lib/mysql
   node:
     image: node:10.17.0-alpine
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
     volumes:
       - .:/var/app:cached
       - /var/app/frontend/node_modules

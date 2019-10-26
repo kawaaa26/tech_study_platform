@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 RUN set -e \
     && apt-get update -y -qq \
     && apt-get install -y curl \
-    && apt-get install -y build-essential libpq-dev nodejs yarn \
+    && apt-get install -y build-essential libpq-dev \
     && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && echo "Asia/Tokyo" > /etc/timezone \
     && mkdir -p /var/app
