@@ -17,6 +17,14 @@ const rules = {
   ]
 }
 
+const resolve = {
+  extensions: [".js", ".jsx", ".ts", ".tsx"],
+  modules: [
+    path.resolve(__dirname, "./src"),
+    path.resolve(__dirname, "./node_modules")
+  ]
+}
+
 const devServer = {
   contentBase: path.resolve(__dirname, "./public"),
   inline: true,
@@ -29,5 +37,6 @@ module.exports = {
   entry: "./src/index.js",
   output,
   module: rules,
+  resolve,
   devServer
 }
