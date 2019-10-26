@@ -1,5 +1,10 @@
 const path = require('path')
 
+const output = {
+  path: path.resolve(__dirname, "./public/assets"),
+  filename: "bundle.js"
+}
+
 const babelLoader = {
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
@@ -12,11 +17,17 @@ const rules = {
   ]
 }
 
+const devServer = {
+  contentBase: path.resolve(__dirname, "./public"),
+  open: true,
+  inline: true,
+  hot: true,
+  port: 8081
+}
+
 module.exports = {
   entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "./public/assets"),
-    filename: "bundle.js"
-  },
-  module: rules
+  output,
+  module: rules,
+  devServer
 }
