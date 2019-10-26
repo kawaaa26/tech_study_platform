@@ -19,9 +19,9 @@ const rules = {
 
 const devServer = {
   contentBase: path.resolve(__dirname, "./public"),
-  open: true,
   inline: true,
   hot: true,
+  host: '0.0.0.0',
   port: 8081
 }
 

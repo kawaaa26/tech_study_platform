@@ -19,6 +19,17 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql_data:/var/lib/mysql
+  node:
+    image: node:10.17.0-alpine
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    volumes:
+      - .:/var/app:cached
+      - /var/app/frontend/node_modules
+    working_dir: /var/app/frontend
+    ports:
+      - '8081:8081'
+    command: [sh, -c, yarn && yarn dev]
 
 volumes:
   mysql_data:
