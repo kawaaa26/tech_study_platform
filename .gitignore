@@ -22,3 +22,7 @@
 /config/master.key
 /vendor/bundle
 .env
+
+/frontend/public/assets
+/frontend/node_modules
+.DS_Store
