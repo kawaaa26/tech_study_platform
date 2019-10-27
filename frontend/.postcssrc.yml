@@ -1,0 +1,4 @@
+plugins:
+  autoprefixer: {}
+  postcss-discard-comments: {}
+  postcss-nesting: {}

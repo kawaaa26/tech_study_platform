@@ -39,16 +39,24 @@ const fileLoader = {
 const sassLoader = {
   test: /\.(scss|sass)?$/i,
   use: [
+    { loader: "style-loader" },
     {
       loader: "css-loader",
       options: {
         modules: {
           localIdentName: "[name]__[local]___[hash:base64:5]"
         },
+        sourceMap: true
       }
     },
-    {loader: "postcss-loader"},
-    {loader: "sass-loader"}
+    {
+      loader: "postcss-loader",
+      options: { sourceMap: true }
+    },
+    {
+      loader: "sass-loader",
+      options: { sourceMap: true }
+    }
   ]
 }
 
