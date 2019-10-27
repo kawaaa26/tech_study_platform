@@ -6,20 +6,31 @@ const mode = isProduction ? "production" : "development"
 const output = {
   path: path.resolve(__dirname, "./public"),
   publicPath: "/assets/",
-  filename: "bundle.js"
+  filename: "bundle-[hash].js"
 }
 
 const babelLoader = {
-  test: /\.(js|jsx)$/,
+  test: /\.(js|jsx)?$/,
   exclude: /node_modules/,
   loader: "babel-loader",
 }
 
-const rules = {
-  rules: [
-    Object.assign({}, babelLoader)
+const fileLoader = {
+  test: /\.(jpg|jpeg|png|gif|svg|eot|ttf|woff|woff2)$/i,
+  use: [
+    {
+      loader: "file-loader",
+      options: {
+        name: "[path][name]-[hash].[ext]",
+      }
+    }
   ]
 }
+
+const loaders = [
+  babelLoader,
+  fileLoader
+]
 
 const resolve = {
   extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -41,7 +52,9 @@ module.exports = {
   mode,
   entry: "./src/index.js",
   output,
-  module: rules,
+  module: {
+    rules: loaders
+  },
   resolve,
   devServer
 }
