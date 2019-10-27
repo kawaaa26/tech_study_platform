@@ -6,13 +6,22 @@ const mode = isProduction ? "production" : "development"
 const output = {
   path: path.resolve(__dirname, "./public"),
   publicPath: "/assets/",
-  filename: "bundle-[hash].js"
+  filename: "bundle.js"
 }
 
 const babelLoader = {
   test: /\.(js|jsx)?$/,
   exclude: /node_modules/,
   loader: "babel-loader",
+}
+
+const tsLoader = {
+  test: /\.(ts|tsx)?$/,
+  exclude: /node_modules/,
+  use: [
+    { loader: "babel-loader"},
+    { loader: "ts-loader" }
+  ]
 }
 
 const fileLoader = {
@@ -45,6 +54,7 @@ const sassLoader = {
 
 const loaders = [
   babelLoader,
+  tsLoader,
   fileLoader,
   sassLoader
 ]
