@@ -23,7 +23,21 @@ module ProgSchool
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.i18n.default_locale = :ja
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
 
+    config.generators do |g|
+      g.assets false
+      g.skip_routes true
+      g.helper false
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        controller_specs: false,
+        routing_specs: false
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
