@@ -5,6 +5,8 @@
     "module": "es6",
     "esModuleInterop": true,
     "strictNullChecks": true,
+    "allowJs": true,
+    "declaration": false,
     "jsx": "react",
     "moduleResolution": "node"
   },
