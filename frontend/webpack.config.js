@@ -1,7 +1,11 @@
 const path = require('path')
+const isProduction = process.env.NODE_ENV === "production"
+
+const mode = isProduction ? "production" : "development"
 
 const output = {
-  path: path.resolve(__dirname, "./public/assets"),
+  path: path.resolve(__dirname, "./public"),
+  publicPath: "/assets/",
   filename: "bundle.js"
 }
 
@@ -34,6 +38,7 @@ const devServer = {
 }
 
 module.exports = {
+  mode,
   entry: "./src/index.js",
   output,
   module: rules,
