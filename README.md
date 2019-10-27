@@ -5,4 +5,8 @@ $ docker-compose up --build
 $ docker-compose exec app db:create
 ```
 
-上記実行後、`http://localhost:3000`にアクセス
+## 開発環境
+* API
+  * `http://localhost:3000`
+* フロント
+  * `http://localhost:8081`
