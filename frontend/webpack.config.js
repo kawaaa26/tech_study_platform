@@ -27,9 +27,26 @@ const fileLoader = {
   ]
 }
 
+const sassLoader = {
+  test: /\.(scss|sass)?$/i,
+  use: [
+    {
+      loader: "css-loader",
+      options: {
+        modules: {
+          localIdentName: "[name]__[local]___[hash:base64:5]"
+        },
+      }
+    },
+    {loader: "postcss-loader"},
+    {loader: "sass-loader"}
+  ]
+}
+
 const loaders = [
   babelLoader,
-  fileLoader
+  fileLoader,
+  sassLoader
 ]
 
 const resolve = {
