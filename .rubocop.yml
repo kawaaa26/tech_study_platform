@@ -1,0 +1,15 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - config/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - frontend/node_modules/**/*
+  TargetRubyVersion: 2.6
