@@ -2,7 +2,7 @@
 
 ```sh
 $ docker-compose up --build
-$ docker-compose exec app db:create
+$ docker-compose exec app rails db:create
 ```
 
 ## 開発環境
