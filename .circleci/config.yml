@@ -60,22 +60,22 @@ jobs:
       - image: circleci/node:10.17.0
     steps:
       - checkout
-      - run: cd frontend
-      - restore_cache:
-          keys:
-              - v1-dependencies-{{ checksum "yarn.lock" }}
-              - v1-dependencies-
-      - run: yarn
-      - save_cache:
-          paths:
-            - ./node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
-      - run: yarn lint
+      - run: ls
+      # - restore_cache:
+      #     keys:
+      #         - v1-dependencies-{{ checksum "yarn.lock" }}
+      #         - v1-dependencies-
+      # - run: yarn
+      # - save_cache:
+      #     paths:
+      #       - ./node_modules
+      #     key: v1-dependencies-{{ checksum "yarn.lock" }}
+      # - run: yarn lint
 
 workflows:
   version: 2
   default:
     jobs:
-      - rubocop
-      - rspec
+      # - rubocop
+      # - rspec
       - eslint
