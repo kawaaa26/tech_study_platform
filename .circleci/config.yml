@@ -1,5 +1,4 @@
 version: 2
-
 jobs:
   rspec:
     docker:
@@ -13,6 +12,8 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: password
           TZ: Asia/Toky
+        command: |
+          mysqld --default-authentication-plugin=mysql_native_password
     steps:
       - checkout
       - restore_cache:
@@ -20,10 +21,10 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       - run:
-        command: |
-          apt-get update -y -qq
-          apt-get install -y curl
-          apt-get install -y build-essential libpq-dev
+          command: |
+            sudo apt-get update -y -qq
+            sudo apt-get install -y curl
+            sudo apt-get install -y build-essential libpq-dev
       - run: bundle -j4 --path vendor/bundle --without development production
       - save_cache:
           paths:
@@ -39,21 +40,43 @@ jobs:
           RAILS_ENV: test
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - run:
-        command: |
-          apt-get update -y -qq
-          apt-get install -y curl
-          apt-get install -y build-essential libpq-dev
+          command: |
+            sudo apt-get update -y -qq
+            sudo apt-get install -y curl
+            sudo apt-get install -y build-essential libpq-dev
       - run: bundle -j4 --path vendor/bundle --without development production
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run: bundle exec rubocop
+  eslint:
+    docker:
+      - image: circleci/node:10.17.0
+    working_directory: ~/app_project/frontend
+    steps:
+      - checkout:
+          path: ~/app_project
+      - restore_cache:
+          keys:
+              - v1-dependencies-{{ checksum "yarn.lock" }}
+              - v1-dependencies-
+      - run: yarn
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn lint
 
-workflow:
+workflows:
   version: 2
   default:
     jobs:
       - rubocop
       - rspec
+      - eslint
