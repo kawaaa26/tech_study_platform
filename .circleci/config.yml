@@ -12,6 +12,8 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: password
           TZ: Asia/Toky
+        command: |
+          mysqld --default-authentication-plugin=mysql_native_password
     steps:
       - checkout
       - restore_cache:
