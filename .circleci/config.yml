@@ -40,6 +40,10 @@ jobs:
           RAILS_ENV: test
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - run:
           command: |
             sudo apt-get update -y -qq
