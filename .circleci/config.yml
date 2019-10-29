@@ -58,24 +58,20 @@ jobs:
   eslint:
     docker:
       - image: circleci/node:10.17.0
+    working_directory: ~/app_project/frontend
     steps:
-      - checkout
+      - checkout:
+          path: ~/app_project
       - restore_cache:
           keys:
-              - v1-dependencies-{{ checksum "frontend/yarn.lock" }}
+              - v1-dependencies-{{ checksum "yarn.lock" }}
               - v1-dependencies-
-      - run:
-          command: |
-            cd frontend
-            yarn
+      - run: yarn
       - save_cache:
           paths:
-            - ./frontend/node_modules
-          key: v1-dependencies-{{ checksum "frontend/yarn.lock" }}
-      - run:
-          command: |
-            cd frontend
-            yarn lint
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn lint
 
 workflows:
   version: 2
