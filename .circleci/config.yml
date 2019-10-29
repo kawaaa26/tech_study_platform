@@ -20,9 +20,9 @@ jobs:
             - v1-dependencies-
       - run:
           command: |
-            apt-get update -y -qq
-            apt-get install -y curl
-            apt-get install -y build-essential libpq-dev
+            sudo apt-get update -y -qq
+            sudo apt-get install -y curl
+            sudo apt-get install -y build-essential libpq-dev
       - run: bundle -j4 --path vendor/bundle --without development production
       - save_cache:
           paths:
@@ -40,9 +40,9 @@ jobs:
       - checkout
       - run:
           command: |
-            apt-get update -y -qq
-            apt-get install -y curl
-            apt-get install -y build-essential libpq-dev
+            sudo apt-get update -y -qq
+            sudo apt-get install -y curl
+            sudo apt-get install -y build-essential libpq-dev
       - run: bundle -j4 --path vendor/bundle --without development production
       - save_cache:
           paths:
