@@ -50,7 +50,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run: bundle exec rubocop
 
-workflow:
+workflows:
   version: 2
   default:
     jobs:
