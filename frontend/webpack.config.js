@@ -1,4 +1,5 @@
 const path = require('path')
+const DotEnv = require('dotenv-webpack')
 const isProduction = process.env.NODE_ENV === "production"
 
 const mode = isProduction ? "production" : "development"
@@ -67,6 +68,10 @@ const loaders = [
   sassLoader
 ]
 
+const plugins = [
+  new DotEnv()
+]
+
 const resolve = {
   extensions: [".js", ".jsx", ".ts", ".tsx"],
   modules: [
@@ -90,6 +95,7 @@ module.exports = {
   module: {
     rules: loaders
   },
+  plugins,
   resolve,
   devServer
 }
