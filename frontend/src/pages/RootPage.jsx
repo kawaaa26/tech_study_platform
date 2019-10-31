@@ -1,9 +1,12 @@
 import React from "react"
-import { BrowserRouter, Route } from "react-router-dom"
+// FIXME: BrowserRouterを使いたい(直リンの挙動が怪しいので一旦HashRouterで機能を作る)
+import { HashRouter as Router, Route } from "react-router-dom"
 import { Home } from "pages/Home"
+import { SignIn } from 'pages/SignIn'
 
 export const RootPage = () => (
-  <BrowserRouter>
+  <Router>
     <Route exact path="/" component={Home} />
-  </BrowserRouter>
+    <Route path="/signin" component={SignIn} />
+  </Router>
 )
