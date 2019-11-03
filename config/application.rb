@@ -38,6 +38,13 @@ module ProgSchool
         routing_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
+    Global.configure do |config|
+      config.environment = Rails.env.to_s
+      config.config_directory = Rails.root.join('config', 'global').to_s
+      config.yaml_whitelist_classes = [] # optional configuration
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
