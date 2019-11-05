@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InspectFirebaseIdToken::Organizer
   include Interactor::Organizer
 
