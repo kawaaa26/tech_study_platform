@@ -1,0 +1,2 @@
+default:
+  project_id: <%= ENV.fetch("FIREBASE_PROJECT_ID", "") %>
