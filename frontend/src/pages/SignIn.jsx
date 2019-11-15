@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import * as firebaseApp from "../lib/firebaseApp/index.js"
-import * as firebase from "firebase"
-import * as firebaseui from "firebaseui"
+import { firebaseApp } from "../lib/firebaseApp/index.js"
 
 console.log(firebaseApp)
 
@@ -15,14 +13,8 @@ export const SignIn = () => {
       ${password}
     `)
 
-    // (async () => {
-
-    // const res = await firebaseApp.services_.auth().signInWithEmailAndPassword(email, password);
-    // const res = await firebaseApp.auth().signInWithEmailAndPassword(email, password);
-    const ui = new firebaseui.auth.AuthUI(firebase.auth())
-    // firebase.auth().signInWithEmailAndPassword(email, password).then(function(res) {
-    console.log(ui)
-    ui.start("#firebaseui-auth-container", submit)
+    const res = await firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    console.log(res)
   }
 
   return (
