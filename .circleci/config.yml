@@ -1,60 +1,5 @@
 version: 2
 jobs:
-  rspec:
-    docker:
-      - image: circleci/ruby:2.6.5
-        environment:
-          RAILS_ENV: test
-          MYSQL_DB_USER: root
-          MYSQL_DB_PASSWORD: password
-          MYSQL_DB_HOST: 127.0.0.1
-      - image: circleci/mysql:8.0.18
-        environment:
-          MYSQL_ROOT_PASSWORD: password
-          TZ: Asia/Toky
-        command: |
-          mysqld --default-authentication-plugin=mysql_native_password
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          command: |
-            sudo apt-get update -y -qq
-            sudo apt-get install -y curl
-            sudo apt-get install -y build-essential libpq-dev
-      - run: bundle -j4 --path vendor/bundle --without development production
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      - run: bundle exec rspec --color --require spec_helper spec --format progress
-  rubocop:
-    docker:
-      - image: circleci/ruby:2.6.5
-        environment:
-          RAILS_ENV: test
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          command: |
-            sudo apt-get update -y -qq
-            sudo apt-get install -y curl
-            sudo apt-get install -y build-essential libpq-dev
-      - run: bundle -j4 --path vendor/bundle --without development production
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rubocop
   eslint:
     docker:
       - image: circleci/node:10.17.0
@@ -77,6 +22,4 @@ workflows:
   version: 2
   default:
     jobs:
-      - rubocop
-      - rspec
       - eslint
