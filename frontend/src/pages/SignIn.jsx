@@ -3,28 +3,27 @@ import * as firebaseApp from "../lib/firebaseApp/index.js"
 import * as firebase from "firebase"
 import * as firebaseui from "firebaseui"
 
-console.log(firebaseApp);
+console.log(firebaseApp)
 
 export const SignIn = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const submit = async() => {
-       alert(`
+  const submit = async () => {
+    alert(`
       ${email}
       ${password}
     `)
 
-  // (async () => {
+    // (async () => {
 
     // const res = await firebaseApp.services_.auth().signInWithEmailAndPassword(email, password);
     // const res = await firebaseApp.auth().signInWithEmailAndPassword(email, password);
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+    const ui = new firebaseui.auth.AuthUI(firebase.auth())
     // firebase.auth().signInWithEmailAndPassword(email, password).then(function(res) {
     console.log(ui)
     ui.start("#firebaseui-auth-container", submit)
-    }
-
+  }
 
   return (
     <form onSubmit={submit}>
