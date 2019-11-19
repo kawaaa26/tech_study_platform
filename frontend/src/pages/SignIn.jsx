@@ -13,8 +13,14 @@ export const SignIn = () => {
       ${password}
     `)
 
-    const res = await firebaseApp.auth().signInWithEmailAndPassword(email, password)
-    console.log(res)
+    try {
+      const res = await firebaseApp.auth().signInWithEmailAndPassword(email, password)
+      console.log("SUCCEEDED!")
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+      console.log("Login Failed")
+    }
   }
 
   return (
