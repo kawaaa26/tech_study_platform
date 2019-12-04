@@ -1,14 +1,18 @@
 import React, { useState } from "react"
+import { firebaseApp } from "../lib/firebaseApp/index.js"
 
 export const SignIn = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const submit = () => {
+  const submit = async () => {
     alert(`
       ${email}
       ${password}
     `)
+
+    const idToken = await firebaseApp.auth().currentUser.getIdToken(false)
+    console.log(`current_user LOGIN TOKEN is HERE. ${idToken}`)
   }
 
   return (
