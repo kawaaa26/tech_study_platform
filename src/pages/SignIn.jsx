@@ -6,13 +6,8 @@ export const SignIn = () => {
   const [password, setPassword] = useState("")
 
   const submit = async () => {
-    alert(`
-      ${email}
-      ${password}
-    `)
-
     const idToken = await firebaseApp.auth().currentUser.getIdToken(false)
-    console.log(`current_user LOGIN TOKEN is HERE. ${idToken}`)
+    console.log(`LOGIN TOKEN: ${idToken}`)
   }
 
   return (
